@@ -27,7 +27,6 @@
           <li ng-class="isActive('/contract')"><a ng-href="#/contract">Contract</a></li>
           <li><a ng-href="#/wallet">Wallet</a></li>
           <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
         </ul>
         <h3 ng-controller="UserCtrl" class="text-muted">{{user.name}}</h3>
       </div>
@@ -35,7 +34,7 @@
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>Amsterdam <span class="glyphicon glyphicon-bitcoin"></span>itcoin Hack Day</p>
       </div>
     </div>
 
@@ -71,8 +70,6 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-
-    <script src="vendor/bitcoinjs.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -85,6 +82,7 @@
         <script src="scripts/controllers/wallet.js"></script>
         <script src="scripts/services/paymentchannel.js"></script>
         <script src="scripts/controllers/contract.js"></script>
+        <script src="scripts/services/blocktrail.js"></script>
         <!-- endbuild -->
 </body>
 </html>
