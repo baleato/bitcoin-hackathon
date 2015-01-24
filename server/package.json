@@ -11,6 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "bitcoinjs-lib": "^1.4.3",
-    "express": "^4.11.1"
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "multer": "^0.1.7",
+    "nedb": "^1.1.1"
   }
 }
