@@ -14,7 +14,7 @@ angular.module('scratchApp')
             getServersPublicKey($scope.walet_publicKey);
 
             signTransactionAtServer();
-        }
+        };
 
         function getServersPublicKey(clientsPublicKey) {
             var req = {
@@ -46,7 +46,7 @@ angular.module('scratchApp')
             // generate wallet
 
             // create payment transaction
-            PaymentChannel.create_and_sign_funding_transaction(clientPrivateKey, txId, redeemScript, 1000000);
+            PaymentChannel.create_and_sign_funding_transaction(clientPrivateKey, txId, redeemScript, amount);
             // create refund transaction
         }
 

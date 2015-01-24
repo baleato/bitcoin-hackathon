@@ -37,6 +37,10 @@ angular
           templateUrl: 'views/contract.html',
           controller: 'ContractCtrl'
       })
+      .when('/pizza', {
+          templateUrl: 'views/pizza.html',
+          controller: 'PizzaCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
