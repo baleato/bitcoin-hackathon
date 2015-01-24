@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('scratchApp')
-    .controller('ContractCtrl', function ($scope) {
+    .controller('ContractCtrl', function ($scope, $http, $location) {
         var serversPublicKey,
             wallet,
             paymentTx,
@@ -9,17 +9,25 @@ angular.module('scratchApp')
             signedTx;
 
         $scope.generate = function () {
-            step1_getServersPublicKey($scope.walet_publicKey);
-            step2_createTransactions($scope.wallet_amount, $scope.wallet_duration);
-            step3_signTransactionAtServer();
+            getServersPublicKey($scope.walet_publicKey);
+
+            signTransactionAtServer();
         }
 
-        function step1_getServersPublicKey(clientsPublicKey) {
-            alert(clientsPublicKey);
+        function getServersPublicKey(clientsPublicKey) {
+            $http.post("http://0.0.0.0:3000/wallet/create", {clientsPublicKey:"026477115981fe981a6918a6297d9803c4dc04f328f22041bedff886bbc2962e01"}).success(function (data, status, headers, config) {
+                console.log("Server responded with key: " + data);
+                serversPublicKey = data;
+                createTransactions($scope.wallet_amount, $scope.wallet_duration);
+            }).
+                error(function (data, status, headers, config) {
+                    alert("Server returned an error: " + status + " " + data);
+                    $location.path('/');
+                });
             serversPublicKey = "ServersPublicKey";
         }
 
-        function step2_createTransactions(amount, duration) {
+        function createTransactions(amount, duration) {
             // generate wallet
 
             // create payment transaction
@@ -27,7 +35,7 @@ angular.module('scratchApp')
             // create refund transaction
         }
 
-        function step3_signTransactionAtServer() {
+        function signTransactionAtServer() {
             signedTx = "signed transaction";
         }
-});
+    });

@@ -17,7 +17,10 @@ app.get('/', function (req, res) {
 
 // { userPublicKey : hex } : { ServerPublicKey : hex }
 app.post('/wallet/create', function (req, res) {
-	var userPubKey = bitcoin.ECPubKey.fromHex(req.body.userPublicKey);
+    var userPubKeyHex = req.body.userPublicKey;
+    console.log("Creating key for the user: " + userPubKeyHex);
+
+    var userPubKey = bitcoin.ECPubKey.fromHex(userPubKeyHex);
 	
 	var serverPrivKey = bitcoin.ECKey.makeRandom();
 	
