@@ -5,7 +5,7 @@ angular.module('scratchApp')
             BitcoinJS is availabel through the 'Bitcoin' public variable
          */
 
-        var paychans = {
+        return {
 
             // Export necessary functions here
             
@@ -35,7 +35,7 @@ angular.module('scratchApp')
              * satoshis: amount of Satoshis to send (example 1000000)
              */
             create_funding_transaction : function(private_key_1, input_transaction_id, redeemScript, satoshis) {
-                var multisig_address = paychans.get_multisig_address_from_redeem_script(redeemScript);
+                var multisig_address = this.get_multisig_address_from_redeem_script(redeemScript);
                 var fund_tx_builder = new Bitcoin.TransactionBuilder();
                 // Add the input with *hash* form previous transaction hash
                 // and index of the output to use (this is an existing transaction in the blockchain)
@@ -51,6 +51,4 @@ angular.module('scratchApp')
                 };
             }
         };
-        
-        return paychans;
     }]);
