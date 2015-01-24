@@ -29,9 +29,9 @@ angular.module('scratchApp')
             },
             
             /** Create funding transaction
-             * private_key_1: private key (of person funding transaction) in format returned by Bitcoin.ECKey.makeRandom()
+             * private_key_1: private key (of person funding transaction, A) in format returned by Bitcoin.ECKey.makeRandom()
              * input_transaction_id: id of the input Bitcoin transaction (example Bitcoin.ECKey.makeRandom().pub)
-             * redeemScript: multisigOutput
+             * redeemScript: multisigOutput (this uniquely generates the multisig address)
              * satoshis: amount of Satoshis to send (example 1000000)
              */
             create_funding_transaction : function(private_key_1, input_transaction_id, redeemScript, satoshis) {
@@ -45,10 +45,29 @@ angular.module('scratchApp')
                 // Sing and broadcast only after refund has been signed by both
                 fund_tx_builder.sign(0, private_key_1); // Sign transaction
                 var fund_tx = fund_tx_builder.build();
-                return {
-                    transaction_id: fund_tx.getId(),
-                    raw_tx_builder_with_signature: fund_tx_builder
-                };
+                return fund_tx.getId();
+            },
+            
+            /** Create return transaction from multisig_address to a (public key from user person funding transaction, A)
+             * private_key_1: private key (of person funding transaction, A) in format returned by Bitcoin.ECKey.makeRandom()
+             * input_transaction_id : id of the funding transaction (from create_funding_transaction)
+             * lock_time : this should be a unix timestamp or a block newer/higher than 340297 (current block)
+             * redeemScript: multisigOutput (this uniquely generates the multisig address)
+             * satoshis: amount of Satoshis to send (example 1000000)
+             */
+            create_refund_transaction : function(private_key_1, input_transaction_id, lock_time, redeemScript, satoshis) {
+                var tx_builder = new Bitcoin.TransactionBuilder();
+                // Add the input with *hash* form previous transaction hash and index of the output to use
+                tx_builder.addInput( input_transaction_id, 0);
+                //tx_builder.addOutput("1Gokm82v6DmtwKEB8AiVhm82hyFSsEvBDK", 15000); // Output address plus amount in satoshis
+                tx_builder.addOutput(private_key_1.pub.getAddress().toString(), 10000); // Output address plus amount in satoshis
+                // Make transaction only spendable/minable in the future
+                tx_builder.tx.locktime = lock_time // Some block in the furute (currently network is after block 340297)
+                tx_builder.tx.ins[0].sequence = 1 // Transaction will be final regardless of locktime if 4294967295
+                tx_builder.sign(0, private_key_1, redeemScript); // Sign transaction
+                var tx = tx_builder.buildIncomplete();
+                
+                return tx.toHex();
             }
         };
     }]);
