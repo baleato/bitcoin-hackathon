@@ -34,3 +34,17 @@ Extras
 
 - NoRiskWallet has to put a collateral with the merchants that is at least as big as the funding users have in their NoRiskWallet
 
+
+Implementation details
+----------------------
+
+The system is based in Bitcoin multisignature addresses (2 of 2), used between customer and NoRiskWallet and between NoRiskWallet and merchant
+
+Both users and merchants establish a payment channel with NoRiskWallet.
+The user puts locks for sometime an amount is willing to partially spend.
+The merchant agrees to have a payment channel with NoRiskWallet where NoRiskWallet locks some funds for a limited period of time.
+
+After payment channels are opened and confirmed in the bictoin blockchain a user can create in collaboration with merchant and NoRiskWallet, two Bitcoin transactions that depend on each other and have to be signed in an specific order to:
+1- pay the merchant without possibility of being double spend (with the merchant's signature)
+2- return the collateral NoRiskWallet locked without possibility of loosing funds
+3- customer having the final word in approving the whole chain of transactions
