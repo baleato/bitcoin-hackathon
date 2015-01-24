@@ -15,13 +15,23 @@ angular.module('scratchApp')
         }
 
         function getServersPublicKey(clientsPublicKey) {
-            $http.post("http://0.0.0.0:3000/wallet/create", {clientsPublicKey:"026477115981fe981a6918a6297d9803c4dc04f328f22041bedff886bbc2962e01"}).success(function (data, status, headers, config) {
+            var req = {
+                method: 'POST',
+                url: 'http://0.0.0.0:3000/wallet/create',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                data: {
+                    userPublicKey:"026477115981fe981a6918a6297d9803c4dc04f328f22041bedff886bbc2962e01"
+                }
+            };
+
+            $http(req).success(function (data, status, headers, config) {
+
                 console.log("Server responded with key: " + data);
                 serversPublicKey = data;
                 createTransactions($scope.wallet_amount, $scope.wallet_duration);
-            }).
-                error(function (data, status, headers, config) {
-                    alert("Server returned an error: " + status + " " + data);
+                }).error(function (data, status, headers, config) {
                     $location.path('/');
                 });
             serversPublicKey = "ServersPublicKey";
