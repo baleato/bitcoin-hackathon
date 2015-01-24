@@ -60,7 +60,7 @@ angular.module('scratchApp')
                 // Add the input with *hash* form previous transaction hash and index of the output to use
                 tx_builder.addInput( input_transaction_id, 0);
                 //tx_builder.addOutput("1Gokm82v6DmtwKEB8AiVhm82hyFSsEvBDK", 15000); // Output address plus amount in satoshis
-                tx_builder.addOutput(private_key_1.pub.getAddress().toString(), 10000); // Output address plus amount in satoshis
+                tx_builder.addOutput(private_key_1.pub.getAddress().toString(), satoshis); // Output address plus amount in satoshis
                 // Make transaction only spendable/minable in the future
                 tx_builder.tx.locktime = lock_time // Some block in the furute (currently network is after block 340297)
                 tx_builder.tx.ins[0].sequence = 1 // Transaction will be final regardless of locktime if 4294967295

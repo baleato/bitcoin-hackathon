@@ -3,7 +3,8 @@
 
     <form>
         <label><p style="width: 100px">Amount: </p><input type="text" ng-model="walet_amount"></label><br>
-        <label><p style="width: 100px">Public key: </p><input type="text" ng-model="walet_publicKey"></label><br>
+        <label><p style="width: 100px">Public key: </p><input type="text" ng-model="walet_publicKey" value="026477115981fe981a6918a6297d9803c4dc04f328f22041bedff886bbc2962e01"></label><br>
+        <label><p style="width: 100px"></p><input type="text" ng-model="wallet_transactionId"></label><br>
         <label><p style="width: 100px">Duration: </p><input type="text" ng-model="walet_duration"></label><br>
         <input ng-click="generate()" type="button" value="Submit">
     </form>
