@@ -34,7 +34,7 @@ angular.module('scratchApp')
              * redeemScript: multisigOutput (this uniquely generates the multisig address)
              * satoshis: amount of Satoshis to send (example 1000000)
              */
-            create_funding_transaction : function(private_key_1, input_transaction_id, redeemScript, satoshis) {
+            create_and_sign_funding_transaction : function(private_key_1, input_transaction_id, redeemScript, satoshis) {
                 var multisig_address = this.get_multisig_address_from_redeem_script(redeemScript);
                 var fund_tx_builder = new Bitcoin.TransactionBuilder();
                 // Add the input with *hash* form previous transaction hash
@@ -45,7 +45,7 @@ angular.module('scratchApp')
                 // Sing and broadcast only after refund has been signed by both
                 fund_tx_builder.sign(0, private_key_1); // Sign transaction
                 var fund_tx = fund_tx_builder.build();
-                return fund_tx.getId();
+                return fund_tx; // Refund transaction will depend on input_transaction_id = fund_tx.getId();
             },
             
             /** Create return transaction from multisig_address to a (public key from user person funding transaction, A)
@@ -55,7 +55,7 @@ angular.module('scratchApp')
              * redeemScript: multisigOutput (this uniquely generates the multisig address)
              * satoshis: amount of Satoshis to send (example 1000000)
              */
-            create_refund_transaction : function(private_key_1, input_transaction_id, lock_time, redeemScript, satoshis) {
+            create_and_sign_refund_transaction : function(private_key_1, input_transaction_id, lock_time, redeemScript, satoshis) {
                 var tx_builder = new Bitcoin.TransactionBuilder();
                 // Add the input with *hash* form previous transaction hash and index of the output to use
                 tx_builder.addInput( input_transaction_id, 0);
