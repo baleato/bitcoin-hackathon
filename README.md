@@ -48,3 +48,10 @@ After payment channels are opened and confirmed in the bictoin blockchain a user
 1- pay the merchant without possibility of being double spend (with the merchant's signature)
 2- return the collateral NoRiskWallet locked without possibility of loosing funds
 3- customer having the final word in approving the whole chain of transactions
+
+
+The transactions should follow a flow like the one described in the diagrams below:
+
+![alt text](images/Account charging.png "Customer charging the NoRiskWallet")
+![alt text](images/seller connection.png "Seller establishing payment channel with NoRiskWallet")
+![alt text](images/buy process.png "Customer buying from Seller using NoRiskWallet")
