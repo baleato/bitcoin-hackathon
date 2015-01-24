@@ -15,16 +15,16 @@ The problem
 Current solutions
 -----------------
 
-- Bitcoin payments can not be trusted unteil they receive at least 1 confirmation in the blockchain (10 mins on average).
-- Paypal and credit cards can always do charge back from the customer and revoke the payment, even weeks after the transaction took place.
+- Bitcoin payments can not be trusted until they receive at least 1 confirmation in the blockchain (10 mins on average).
+- Paypal and credit cards can always do a charge back and revoke the payment, even weeks after the transaction took place.
 
 
-NoRiskWallet solutions
-----------------------
+NoRiskWallet solution
+---------------------
 
-With NoRiskWallet you can fund a risk free wallet and all the money that you don't spend after a deadline you set some time in the future, will return to you.
+With NoRiskWallet you can fund a risk free wallet and all the money that you don't spend -after a deadline you set some time in the future-, it will return to you.
 
-Now merchants can establish zera trust relations with NoRiskWallet to accept 0 confirmation transactions
+Now merchants can establish zero trust relations with NoRiskWallet to accept 0 confirmation transactions.
 
 You can pay any merchant that has a NoRiskWallet instantly and with no risk.
 
@@ -38,20 +38,22 @@ Extras
 Implementation details
 ----------------------
 
-The system is based in Bitcoin multisignature addresses (2 of 2), used between customer and NoRiskWallet and between NoRiskWallet and merchant
+The system is based on Bitcoin multisignature addresses (2 of 2), used between customer and NoRiskWallet and between NoRiskWallet and merchant.
 
 Both users and merchants establish a payment channel with NoRiskWallet.
-The user puts locks for sometime an amount is willing to partially spend.
+
+The user locks for sometime an amount that (s)he is willing to spend(partialy or totaly).
+
 The merchant agrees to have a payment channel with NoRiskWallet where NoRiskWallet locks some funds for a limited period of time.
 
-After payment channels are opened and confirmed in the bictoin blockchain a user can create in collaboration with merchant and NoRiskWallet, two Bitcoin transactions that depend on each other and have to be signed in an specific order to:
+After payment channels are opened and confirmed in the bictoin blockchain a user can safely create, in collaboration with merchant and NoRiskWallet, two Bitcoin transactions that depend on each other and have to be signed in an specific order to:
 
-1. pay the merchant without possibility of being double spend (with the merchant's signature)
-2. return the collateral NoRiskWallet locked without possibility of loosing funds
+1. pay the merchant without possibility of being double spend (without the merchant's signature)
+2. return the NoRiskWallet locked collateral without possibility of loosing funds
 3. customer having the final word in approving the whole chain of transactions
 
 
-The transactions should follow a flow like the one described in the diagrams below:
+The transactions should follow the flows described in the diagrams below:
 
 ![alt text](images/Account charging.png "Customer charging the NoRiskWallet")
 ![alt text](images/seller connection.png "Seller establishing payment channel with NoRiskWallet")
