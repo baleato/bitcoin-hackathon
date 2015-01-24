@@ -21,8 +21,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-controller="MenuCtrl">
-      <div class="header">
+    <div class="container" ng-controller="MenuCtrl" >
+      <div class="header" ng-show="showHeader()">
         <ul class="nav nav-pills pull-right">
           <li ng-class="isActive('/contract')"><a ng-href="#/contract">Contract</a></li>
           <li><a ng-href="#/wallet">Wallet</a></li>
@@ -83,6 +83,7 @@
         <script src="scripts/services/paymentchannel.js"></script>
         <script src="scripts/controllers/contract.js"></script>
         <script src="scripts/services/blocktrail.js"></script>
+        <script src="scripts/controllers/pizza.js"></script>
         <!-- endbuild -->
 </body>
 </html>
