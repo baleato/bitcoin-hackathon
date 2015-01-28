@@ -66,7 +66,7 @@ The transactions should follow the flows described in the diagrams below:
 
 
 Payment diagram(alternative representation):
-![alt text](images/transactions_diagram.JPG "Paymen diagram")
+![alt text](images/diagrams/transactions.jpg "Paymen diagram")
 
 Terminology
 - **A**: Customer, **B**: NoRiskWallet and **C**: Merchant
