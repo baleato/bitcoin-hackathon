@@ -45,6 +45,7 @@ Establishing first payment channel between customer and NoRiskWallet
 --------------------------------------------------------------------
 
 The sequence below explains how to configure a payment channel. There is nothing different in this configuration from standard payment channels in previous documentation.
+
 This payment channel should be created and confirmed in the Bitcoin blockchain at least two hours before the payment.
 
 Transactions sequence:
@@ -60,7 +61,9 @@ Establishing second payment channel between NoRiskWallet and merchant
 ---------------------------------------------------------------------
 
 The sequence below explains how to configure a payment channel. There is nothing different in this configuration from standard payment channels in previous documentation.
+
 This payment channel should be created and confirmed in the Bitcoin blockchain at least two hours before the payment.
+
 **Note**: This sequence is exactly the same as the fir payment channel, only the actors and their roles in the transaction are changed.
 
 Transactions sequence:
