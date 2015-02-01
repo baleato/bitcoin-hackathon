@@ -89,6 +89,8 @@ Notes:
 - Transaction K depends on inputs from M
 - Transaction J depends on inputs from N
 
+**Detailed explanations** of how to implement the transactions can be found in the [Transactions Documentation](TRANSACTIONS_DOCUMENTATION.md)
+
 Front end mockups
 -----------------
 

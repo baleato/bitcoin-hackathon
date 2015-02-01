@@ -5,13 +5,13 @@ Transactions technical documentation
 Knowledge references
 --------------------
 
-- Micropayment channels: https://bitcoin.org/en/developer-guide#micropayment-channel and https://bitcoinj.github.io/working-with-micropayments
-- Locktime and sequence numbers: https://bitcoin.org/en/developer-guide#locktime-and-sequence-number
+- **Micropayment channels**: https://bitcoin.org/en/developer-guide#micropayment-channel and https://bitcoinj.github.io/working-with-micropayments
+- **Locktime** and sequence numbers: https://bitcoin.org/en/developer-guide#locktime-and-sequence-number
 
 
-TRansactiosn overview
+Transactions overview
 ---------------------
-Payment diagram(alternative representation):
+Payment diagram overview:
 ![alt text](images/diagrams/transactions.jpg "Payment diagram")
 
 Terminology
@@ -51,11 +51,26 @@ Transactions sequence:
 
 1. **A** creates a public key APubK1.
 2. **A** requests a public key from **B** BPubK1 and creates a multi-signature address **M1** using APubK1 and BPubK1 that requires 2 of 2 signatures to move funds.
-3. **A** creates and signs a funding transaction (**N**) that sends 1 BTC to to M1. But this transaction is **not yet released**.
+3. **A** creates and signs a funding transaction (**N**) that sends 1 BTC to M1. But this transaction is **not yet released**.
 4. **A** creates a refund transaction (**J**) that uses as input the output of transaction **N**. This transaction has a time-lock set to 4 weeks in the future.
-5. **A** sends transaction **J** to **B** which signs and returns signed copy of **J** to **A**
+5. **A** sends transaction **J** to **B** who signs and returns signed copy of **J** to **A**
 6. **A** now has a valid refund transaction (**J**) and publishes funding transaction **N**. Once this transaction is confirmed in a Bitcoin block, the payment channel between **A** and **B** is open.
 
+Establishing second payment channel between NoRiskWallet and merchant
+---------------------------------------------------------------------
+
+The sequence below explains how to configure a payment channel. There is nothing different in this configuration from standard payment channels in previous documentation.
+This payment channel should be created and confirmed in the Bitcoin blockchain at least two hours before the payment.
+**Note**: This sequence is exactly the same as the fir payment channel, only the actors and their roles in the transaction are changed.
+
+Transactions sequence:
+
+1. **B** creates a public key BPubK2.
+2. **B** requests a public key from **C** CPubK1 and creates a multi-signature address **M2** using BPubK2 and CPubK1 that requires 2 of 2 signatures to move funds.
+3. **B** creates and signs a funding transaction (**M**) that sends 1 BTC to M2. But this transaction is **not yet released**.
+4. **B** creates a refund transaction (**K**) that uses as input the output of transaction **M**. This transaction has a time-lock set to 4 weeks in the future.
+5. **B** sends transaction **K** to **C** who signs and returns signed copy of **J** to **B**
+6. **B** now has a valid refund transaction (**K**) and publishes funding transaction **M**. Once this transaction is confirmed in a Bitcoin block, the payment channel between **B** and **C** is open.
 
 Technology precursors
 ---------------------
@@ -68,4 +83,4 @@ Technology precursors
 Known limitations
 -----------------
 
-- Transaction malleability can change transaction IDs making the chain of transactions discussed in this document unusable. The solution is in the proposed BIP-65 OP_CHECKLOCKTIMEVERIFY https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
+- Transaction malleability can change transaction IDs making the chain of transactions discussed in this document unusable. The solution is to use the proposed BIP-65 OP_CHECKLOCKTIMEVERIFY https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
